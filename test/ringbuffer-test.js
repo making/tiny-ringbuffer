@@ -2,9 +2,16 @@ var should = require('should');
 var RingBuffer = require('../lib/ringbuffer');
 
 describe('#len', function () {
-    it('constructor', function () {
+    it('constructor with number', function () {
         var buf = new RingBuffer(3);
         buf.len.should.equal(3);
+        buf.asArray().should.be.eql([]);
+    });
+
+    it('constructor with array', function () {
+        var buf = new RingBuffer([1, 2, 3]);
+        buf.len.should.equal(3);
+        buf.asArray().should.be.eql([1, 2, 3]);
     });
 });
 
@@ -301,6 +308,18 @@ describe('#iterator', function () {
         var it = buf.iterator();
         it.next().should.equal(200);
         it.next().should.equal(300);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+    });
+
+    it('constructor with array', function () {
+        var buf = new RingBuffer([100, 200, 300]);
+
+        var it = buf.iterator();
+        it.next().should.equal(100);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+        it.next().should.equal(100);
         it.next().should.equal(200);
         it.next().should.equal(300);
     });
