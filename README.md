@@ -1,5 +1,9 @@
 ## Tiny RingBuffer
 
+### Install
+
+    npm install --save-dev tiny-ringbuffer
+
 ### Usage
 
     var RingBuffer = require('tiny-ringbuffer');
