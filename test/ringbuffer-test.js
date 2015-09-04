@@ -216,3 +216,92 @@ describe('#asArray', function () {
         buf.asArray().length.should.equal(3);
     });
 });
+
+
+describe('#iterator', function () {
+    it('size < length', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+
+        var it = buf.iterator();
+        it.next().should.equal(100);
+        it.next().should.equal(100);
+    });
+
+    it('size == length', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+        buf.push(200);
+        buf.push(300);
+
+        var it = buf.iterator();
+        it.next().should.equal(100);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+        it.next().should.equal(100);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+    });
+
+    it('size < length', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+        buf.push(200);
+        buf.push(300);
+        buf.push(400);
+
+        var it = buf.iterator();
+        it.next().should.equal(400);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+        it.next().should.equal(400);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+    });
+
+    it('size == length * 2', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+        buf.push(200);
+        buf.push(300);
+        buf.push(400);
+        buf.push(500);
+        buf.push(600);
+
+        var it = buf.iterator();
+        it.next().should.equal(400);
+        it.next().should.equal(500);
+        it.next().should.equal(600);
+        it.next().should.equal(400);
+        it.next().should.equal(500);
+        it.next().should.equal(600);
+    });
+
+    it('push push push pop', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+        buf.push(200);
+        buf.push(300);
+        buf.pop();
+
+        var it = buf.iterator();
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+    });
+
+    it('push push push pop', function () {
+        var buf = new RingBuffer(3);
+        buf.push(100);
+        buf.push(200);
+        buf.push(300);
+        buf.pop();
+
+        var it = buf.iterator();
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+        it.next().should.equal(200);
+        it.next().should.equal(300);
+    });
+});
