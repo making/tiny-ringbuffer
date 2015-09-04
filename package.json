@@ -1,0 +1,26 @@
+{
+  "name": "tiny-ringbuffer",
+  "version": "0.1.0",
+  "description": "Tiny RingBuffer implementation",
+  "main": "lib/ringbuffer.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter list test/ringbuffer-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/making/tiny-ringbuffer"
+  },
+  "keywords": [
+    "ringbuffer"
+  ],
+  "author": "Toshiaki Maki <makingx@gmail.com> (https://blog.ik.am)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/making/tiny-ringbuffer/issues"
+  },
+  "homepage": "https://github.com/making/tiny-ringbuffer",
+  "devDependencies": {
+    "mocha": "^2.3.0",
+    "should": "^7.1.0"
+  }
+}
